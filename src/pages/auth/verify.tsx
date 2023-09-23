@@ -55,6 +55,7 @@ const Verify = () => {
           error={errors.verificationCode}
           touched={touched.verificationCode}
         />
+        <button>resend code</button>
         <DefaultButton type="submit" isLoading={isLoading} label="Verify" />
       </form>
       {/* <button type="button" onClick={resendCode}></button> */}

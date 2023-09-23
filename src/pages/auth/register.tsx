@@ -29,9 +29,9 @@ const Register = () => {
       );
 
       console.log(values);
-      setTimeout(() => {
-        setRedirect(true);
-      }, 2000);
+      // setTimeout(() => {
+      //   setRedirect(true);
+      // }, 2000);
 
       actions.resetForm();
     } catch (error) {

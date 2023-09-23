@@ -40,7 +40,7 @@ export const loginUser =
   async (dispatch) => {
     try {
       const { error, serverResponse } = await loginAPI({ email, password });
-      if (error) {
+      if (!error) {
         const { firstName, lastName, email } = await serverResponse?.data;
         dispatch(setFirstName(firstName));
         dispatch(setLastName(lastName));

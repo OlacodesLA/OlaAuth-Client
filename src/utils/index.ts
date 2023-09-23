@@ -29,7 +29,9 @@ export function fmtResponse(responseData: any, error: boolean, toast: any) {
   const { statusText, status, data } = responseData;
 
   if (error) {
-    toast.error(data.message);
+    data.toast && toast.error(data.message);
+    console.log(data);
+
     return {
       status,
       serverResponse: data,
@@ -37,7 +39,8 @@ export function fmtResponse(responseData: any, error: boolean, toast: any) {
       error: true,
     };
   } else {
-    toast.success(data.message);
+    data.toast && toast.success(data.message);
+    console.log(data);
     return {
       status,
       serverResponse: data,
