@@ -9,6 +9,7 @@ const baseURL =
 
 const service = axios.create({
   baseURL,
+  withCredentials: true,
 });
 
 // request interceptor

@@ -1,15 +1,15 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 export interface IProfilePayload {
-  id: string;
-  firstName: string;
-  lastName: string;
-  email: string;
-  phone: string;
-  image: string;
-  age: string;
-  isLoading: boolean;
-  isError: string;
+  id?: string;
+  firstName?: string;
+  lastName?: string;
+  email?: string;
+  phone?: string;
+  image?: string;
+  age?: string;
+  isLoading?: boolean;
+  isError?: string;
 }
 
 const initialState: IProfilePayload = {
@@ -20,7 +20,7 @@ const initialState: IProfilePayload = {
   phone: "",
   image: "",
   age: "",
-  isLoading: true,
+  isLoading: false,
   isError: "",
 };
 
@@ -49,10 +49,10 @@ const ProfileSlice = createSlice({
     setAge: (state, { payload }: PayloadAction<string>) => {
       state.age = payload;
     },
-    setProfileLoading: (state, { payload }: PayloadAction<boolean>) => {
+    setIsLoading: (state, { payload }: PayloadAction<boolean>) => {
       state.isLoading = payload;
     },
-    setProfileError: (state, { payload }: PayloadAction<string>) => {
+    setIsError: (state, { payload }: PayloadAction<string>) => {
       state.isError = payload;
     },
   },
@@ -66,8 +66,8 @@ export const {
   setPhone,
   setImage,
   setAge,
-  setProfileLoading,
-  setProfileError,
+  setIsLoading,
+  setIsError,
 } = ProfileSlice.actions;
 
 const ProfileReducer = ProfileSlice.reducer;
