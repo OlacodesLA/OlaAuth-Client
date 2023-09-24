@@ -1,13 +1,9 @@
 import { FC } from "react";
 import { ILayout } from "@/interfaces";
-import { Nav } from "@/components";
 
 const DashboardLayout: FC<ILayout.IDashboardLayout> = ({ children }) => {
   return (
-    <>
-      <Nav />
-      {children}
-    </>
+    <div className="bg-gray-900 w-full h-screen text-white">{children}</div>
   );
 };
 

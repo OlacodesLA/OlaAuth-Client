@@ -25,6 +25,14 @@ export function verifyAPI(data: any): Promise<IResponseType> {
     data: data,
   });
 }
+export function resendCodeAPI(data: any): Promise<IResponseType> {
+  // console.log('look i got here');
+  return $({
+    url: "/auth/resend-code",
+    method: "post",
+    data: data,
+  });
+}
 
 export function checkUsernameAPI(data: any): Promise<IResponseType> {
   return $({

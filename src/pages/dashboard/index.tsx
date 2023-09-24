@@ -1,28 +1,26 @@
 import { useEffect } from "react";
-import { profileAPI } from "@/axios/endpoints/profile.endpoint";
 import DashboardLayout from "@/layouts/dashboardLayout";
 import { RootState } from "@/store";
 import { IProfilePayload } from "@/store/slice/profileSlice";
 import { useSelector } from "react-redux";
+import { getProfile } from "@/services";
+import useAppDispatch from "@/hooks/useAppDispatch";
 
 const Home = () => {
+  const dispatch = useAppDispatch();
+
   const { firstName, lastName, email }: IProfilePayload = useSelector(
     (state: RootState) => state?.profile
   );
 
-  const fetchProfile = async () => {
-    const { serverResponse } = await profileAPI();
-    console.log(serverResponse);
-  };
-
   useEffect(() => {
-    fetchProfile();
+    dispatch(getProfile());
   }, []);
 
   return (
     <DashboardLayout>
       <div className="">Home Page</div>
-      <div className="">
+      <div className="text-center">
         {firstName} {lastName}
       </div>
       <div className="">{email}</div>

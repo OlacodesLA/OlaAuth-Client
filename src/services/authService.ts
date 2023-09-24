@@ -3,6 +3,7 @@ import {
   checkUsernameAPI,
   loginAPI,
   registerAPI,
+  resendCodeAPI,
   verifyAPI,
 } from "@/axios/endpoints/auth.endpoint";
 import {
@@ -71,6 +72,23 @@ export const verifyUser =
       console.error(error);
     }
   };
+
+export const resendCode = (): AppThunk => async (dispatch) => {
+  try {
+    const email = localStorage.getItem("email");
+    console.log(email);
+    dispatch(setIsLoading(true));
+    const { serverResponse } = await resendCodeAPI({
+      email,
+    });
+
+    dispatch(setIsLoading(false));
+    console.log(serverResponse);
+  } catch (error) {
+    dispatch(setIsLoading(false));
+    console.error(error);
+  }
+};
 
 export const checkUsername = async (newUsername) => {
   try {

@@ -13,7 +13,7 @@ import { motion } from "framer-motion";
 
 const Register = () => {
   const [isUsernameAvailable, setIsUsernameAvailable] = useState(true);
-  const [redirect, setRedirect] = useState(false);
+  const [redirect] = useState(false);
   const dispatch = useAppDispatch();
 
   const { isLoading } = useSelector((state: RootState) => state.profile);
@@ -74,11 +74,7 @@ const Register = () => {
   return (
     <AuthLayout tab>
       <div className="">
-        <form
-          onSubmit={handleSubmit}
-          className=" flex flex-col gap-2 transition-all duration-300 ease-in-out"
-        >
-          {" "}
+        <form onSubmit={handleSubmit} className=" flex flex-col gap-2 ">
           <TextField
             type="text"
             placeholder="Username"
@@ -90,21 +86,31 @@ const Register = () => {
             touched={touched.username}
             isUsernameAvailable={isUsernameAvailable}
           />
-          <TextField
-            type="email"
-            placeholder="Email"
-            name="email"
-            handleChange={handleChange}
-            handleBlur={handleBlur}
-            value={values.email}
-            error={errors.email}
-            touched={touched.email}
-          />
           <motion.div
             initial={{
-              y: -10,
+              y: 10,
             }}
-            whileInView={{ y: 0 }}
+            animate={{ y: 0 }}
+            exit={{ opacity: 20, y: 10, transition: { duration: 3 } }}
+            className=""
+          >
+            <TextField
+              type="email"
+              placeholder="Email"
+              name="email"
+              handleChange={handleChange}
+              handleBlur={handleBlur}
+              value={values.email}
+              error={errors.email}
+              touched={touched.email}
+            />
+          </motion.div>
+          <motion.div
+            initial={{
+              y: 10,
+            }}
+            animate={{ y: 0 }}
+            exit={{ opacity: 20, y: 10, transition: { duration: 3 } }}
             className="flex gap-2 items-start"
           >
             <PasswordField

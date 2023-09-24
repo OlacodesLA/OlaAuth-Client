@@ -1,16 +1,14 @@
 import { FC } from "react";
 import { ILayout } from "@/interfaces";
 import { Nav } from "@/components";
-
 import { classNames } from "@/helpers/classNames";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const AuthLayout: FC<ILayout.IAuthLayout> = ({ children, tab }) => {
-  const router = useNavigate();
   const location = useLocation();
   const currentRoute = location.pathname;
   return (
-    <div className="bg-gray-900 w-full h-screen flex justify-center items-start">
+    <div className="bg-gray-900 w-full h-screen flex justify-center items-start text-white">
       <Nav />
       <div className="glass backdrop-blur-[20px] w-1/2 h-screen flex flex-col p-2 border-l border-gray-700">
         <div className="mt-24">
@@ -21,9 +19,9 @@ const AuthLayout: FC<ILayout.IAuthLayout> = ({ children, tab }) => {
                   {["register", "login"].map((i, index) => {
                     const route = `/auth/${i}`;
                     return (
-                      <div
+                      <Link
                         key={index}
-                        onClick={() => router(route)}
+                        to={route}
                         className={classNames(
                           "px-8 rounded-2xl py-1 text-sm font-medium leading-5 text-white",
                           " focus:outline-none focus:ring-0 cursor-pointer",
@@ -33,7 +31,7 @@ const AuthLayout: FC<ILayout.IAuthLayout> = ({ children, tab }) => {
                         )}
                       >
                         <div className="capitalize">{i}</div>
-                      </div>
+                      </Link>
                     );
                   })}
                 </div>

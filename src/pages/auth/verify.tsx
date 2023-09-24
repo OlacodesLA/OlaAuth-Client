@@ -1,6 +1,6 @@
 import { useFormik } from "formik";
 import useAppDispatch from "@/hooks/useAppDispatch";
-import { verifyUser } from "@/services";
+import { resendCode, verifyUser } from "@/services";
 import { RootState } from "@/store";
 import { useSelector } from "react-redux";
 import { DefaultButton, TextField } from "@/components";
@@ -18,6 +18,14 @@ const Verify = () => {
       dispatch(verifyUser(values.verificationCode));
       console.log(values);
       actions.resetForm();
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  const resend = async () => {
+    try {
+      dispatch(resendCode());
+      console.log(values);
     } catch (error) {
       console.error(error);
     }
@@ -55,7 +63,9 @@ const Verify = () => {
           error={errors.verificationCode}
           touched={touched.verificationCode}
         />
-        <button>resend code</button>
+        <p onClick={resend} className="text-gray-300">
+          resend code
+        </p>
         <DefaultButton type="submit" isLoading={isLoading} label="Verify" />
       </form>
       {/* <button type="button" onClick={resendCode}></button> */}

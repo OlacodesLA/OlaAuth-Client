@@ -2,6 +2,14 @@ import { fmtResponse, getToken, hasToken } from "@/utils";
 import axios from "axios";
 import toast from "react-hot-toast";
 
+const checkInternetConnectivity = () => {
+  if (!navigator.onLine) {
+    toast.error("No interneet connection");
+    return Promise.reject(new Error("No internet connection"));
+  }
+  return Promise.resolve();
+};
+
 const baseURL =
   import.meta.env.VITE_PUBLIC_NODE_ENV === "development"
     ? import.meta.env.VITE_PUBLIC_BASE_URL_STAGGING
@@ -14,7 +22,9 @@ const service = axios.create({
 
 // request interceptor
 axios.interceptors.request.use(
-  function (config) {
+  async function (config) {
+    await checkInternetConnectivity();
+
     if (hasToken() && getToken() !== false) {
       config.headers.Authorization = `Bearer ${String(getToken())}`;
     }
@@ -28,6 +38,7 @@ axios.interceptors.request.use(
 // Add a response interceptor
 service.interceptors.response.use(
   // @ts-ignore
+
   (response) => {
     // Return the entire AxiosResponse object
     return fmtResponse(response, false, toast);
