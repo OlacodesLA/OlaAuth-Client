@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useFormik } from "formik";
 import useAppDispatch from "@/hooks/useAppDispatch";
 import { resendCode, verifyUser } from "@/services";
@@ -5,8 +6,10 @@ import { RootState } from "@/store";
 import { useSelector } from "react-redux";
 import { DefaultButton, TextField } from "@/components";
 import AuthLayout from "@/layouts/authLayout";
+import { Navigate } from "react-router-dom";
 
 const Verify = () => {
+  const [redirect, setRedirect] = useState(false);
   const dispatch = useAppDispatch();
 
   const { isLoading, email } = useSelector((state: RootState) => state.profile);
@@ -17,7 +20,10 @@ const Verify = () => {
     try {
       dispatch(verifyUser(values.verificationCode));
       console.log(values);
-      actions.resetForm();
+      setTimeout(() => {
+        setRedirect(true);
+        actions.resetForm();
+      }, 2000);
     } catch (error) {
       console.error(error);
     }
@@ -42,13 +48,9 @@ const Verify = () => {
 
   console.log(values);
 
-  // const resendCode = ()=>{
-  //   try {
-  //     dispatch(resendVerificationCode())
-  //   } catch (error) {
-
-  //   }
-  // }
+  if (redirect) {
+    return <Navigate to={"/auth/login"} />;
+  }
 
   return (
     <AuthLayout>

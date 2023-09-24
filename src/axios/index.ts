@@ -1,4 +1,4 @@
-import { fmtResponse, getToken, hasToken } from "@/utils";
+import { fmtResponse, getToken, isAuthenticated } from "@/utils";
 import axios from "axios";
 import toast from "react-hot-toast";
 
@@ -25,7 +25,7 @@ axios.interceptors.request.use(
   async function (config) {
     await checkInternetConnectivity();
 
-    if (hasToken() && getToken() !== false) {
+    if (isAuthenticated() && getToken() !== false) {
       config.headers.Authorization = `Bearer ${String(getToken())}`;
     }
     return config;

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import AuthLayout from "@/layouts/authLayout";
 import { loginUser } from "@/services/authService";
 import useAppDispatch from "@/hooks/useAppDispatch";
@@ -6,7 +7,11 @@ import { RootState } from "@/store";
 import { useSelector } from "react-redux";
 import { DefaultButton, PasswordField, TextField } from "@/components";
 import { loginSchema } from "@/schemas";
+import { Navigate } from "react-router-dom";
+
 const Login = () => {
+  const [redirect, setRedirect] = useState(false);
+
   const dispatch = useAppDispatch();
 
   const { isLoading } = useSelector((state: RootState) => state.profile);
@@ -16,7 +21,10 @@ const Login = () => {
     try {
       dispatch(loginUser(email, password));
       console.log(values);
-      actions.resetForm();
+      setTimeout(() => {
+        setRedirect(true);
+        actions.resetForm();
+      }, 2000);
     } catch (error) {
       console.error(error);
     }
@@ -31,6 +39,10 @@ const Login = () => {
       validationSchema: loginSchema,
       onSubmit,
     });
+
+  if (redirect) {
+    return <Navigate to={"/"} />;
+  }
 
   return (
     <AuthLayout tab>

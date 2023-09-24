@@ -13,7 +13,7 @@ import { motion } from "framer-motion";
 
 const Register = () => {
   const [isUsernameAvailable, setIsUsernameAvailable] = useState(true);
-  const [redirect] = useState(false);
+  const [redirect, setRedirect] = useState(false);
   const dispatch = useAppDispatch();
 
   const { isLoading } = useSelector((state: RootState) => state.profile);
@@ -29,9 +29,9 @@ const Register = () => {
       );
 
       console.log(values);
-      // setTimeout(() => {
-      //   setRedirect(true);
-      // }, 2000);
+      setTimeout(() => {
+        setRedirect(true);
+      }, 2000);
 
       actions.resetForm();
     } catch (error) {

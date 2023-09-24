@@ -2,6 +2,7 @@ import { AppThunk } from "@/store";
 import {
   checkUsernameAPI,
   loginAPI,
+  logoutAPI,
   registerAPI,
   resendCodeAPI,
   verifyAPI,
@@ -96,6 +97,15 @@ export const checkUsername = async (newUsername) => {
       username: newUsername,
     });
     return error;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const logoutUser = async () => {
+  try {
+    const { error } = await logoutAPI();
+    return !error;
   } catch (error) {
     console.log(error);
   }

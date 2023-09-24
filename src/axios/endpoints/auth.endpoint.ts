@@ -41,3 +41,9 @@ export function checkUsernameAPI(data: any): Promise<IResponseType> {
     data: data,
   });
 }
+export function logoutAPI(): Promise<IResponseType> {
+  return $({
+    url: "/auth/logout",
+    method: "post",
+  });
+}

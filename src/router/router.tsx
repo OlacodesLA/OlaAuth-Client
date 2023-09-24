@@ -6,24 +6,42 @@ import Register from "@/pages/auth/register";
 import Login from "@/pages/auth/login";
 import Verify from "@/pages/auth/verify";
 import { AnimatePresence } from "framer-motion";
+import ProtectedRoute from "./protectedRoute";
+import AuthRoute from "./authRoute";
 
 const AppRoutes = () => {
   const element = useRoutes([
     {
       path: "/",
-      element: <Home />,
+      element: (
+        <ProtectedRoute>
+          <Home />
+        </ProtectedRoute>
+      ),
     },
     {
       path: "/auth/register",
-      element: <Register />,
+      element: (
+        <AuthRoute>
+          <Register />
+        </AuthRoute>
+      ),
     },
     {
       path: "/auth/login",
-      element: <Login />,
+      element: (
+        <AuthRoute>
+          <Login />
+        </AuthRoute>
+      ),
     },
     {
       path: "/auth/verify",
-      element: <Verify />,
+      element: (
+        <AuthRoute>
+          <Verify />
+        </AuthRoute>
+      ),
     },
   ]);
 

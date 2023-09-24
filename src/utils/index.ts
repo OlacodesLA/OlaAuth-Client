@@ -1,25 +1,19 @@
 import Cookies from "js-cookie";
 
-export function saveToken(token: string) {
-  Cookies.set("token", token);
-  console.log("token set");
-
-  return true;
-}
-
-export function getToken() {
+export function isAuthenticated(): boolean {
+  // Check if the user authentication token cookie exists
   const token = Cookies.get("token");
   if (token) {
-    return token;
+    return true;
   } else {
     return false;
   }
 }
 
-export function hasToken() {
+export function getToken(): boolean | string {
   const token = Cookies.get("token");
   if (token) {
-    return true;
+    return token;
   } else {
     return false;
   }
