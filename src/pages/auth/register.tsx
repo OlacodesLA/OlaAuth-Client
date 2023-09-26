@@ -9,7 +9,11 @@ import { useSelector } from "react-redux";
 import { RootState } from "@/store";
 import { registerSchema } from "@/schemas";
 import { Navigate } from "react-router-dom";
-import { motion } from "framer-motion";
+import { motion, useAnimate } from "framer-motion";
+import StaggerChildren, {
+  parentVariants,
+  childVariants,
+} from "@/animations/staggerChildren";
 
 const Register = () => {
   const [isUsernameAvailable, setIsUsernameAvailable] = useState(true);
@@ -27,7 +31,6 @@ const Register = () => {
           password: values.password,
         })
       );
-
       console.log(values);
       setTimeout(() => {
         setRedirect(true);
@@ -75,69 +78,64 @@ const Register = () => {
     <AuthLayout tab>
       <div className="">
         <form onSubmit={handleSubmit} className=" flex flex-col gap-2 ">
-          <TextField
-            type="text"
-            placeholder="Username"
-            name="username"
-            handleChange={handleUsernameChange}
-            handleBlur={handleBlur}
-            value={values.username}
-            error={errors.username}
-            touched={touched.username}
-            isUsernameAvailable={isUsernameAvailable}
-          />
-          <motion.div
-            initial={{
-              y: 10,
-            }}
-            animate={{ y: 0 }}
-            exit={{ opacity: 20, y: 10, transition: { duration: 3 } }}
-            className=""
-          >
-            <TextField
-              type="email"
-              placeholder="Email"
-              name="email"
-              handleChange={handleChange}
-              handleBlur={handleBlur}
-              value={values.email}
-              error={errors.email}
-              touched={touched.email}
-            />
-          </motion.div>
-          <motion.div
-            initial={{
-              y: 10,
-            }}
-            animate={{ y: 0 }}
-            exit={{ opacity: 20, y: 10, transition: { duration: 3 } }}
-            className="flex gap-2 items-start"
-          >
-            <PasswordField
-              name="password"
-              placeholder="Password"
-              handleChange={handleChange}
-              handleBlur={handleBlur}
-              value={values.password}
-              error={errors.password}
-              touched={touched.password}
-            />
-            <PasswordField
-              name="password2"
-              placeholder="Confirm Password"
-              handleChange={handleChange}
-              handleBlur={handleBlur}
-              value={values.password2}
-              error={errors.password2}
-              touched={touched.password2}
-            />
-          </motion.div>{" "}
-          <DefaultButton
-            type="submit"
-            isLoading={isLoading}
-            label="Create Account"
-            disable={!isUsernameAvailable}
-          />
+          <StaggerChildren>
+            <motion.div variants={childVariants}>
+              <TextField
+                type="text"
+                placeholder="Username"
+                name="username"
+                handleChange={handleUsernameChange}
+                handleBlur={handleBlur}
+                value={values.username}
+                error={errors.username}
+                touched={touched.username}
+                isUsernameAvailable={isUsernameAvailable}
+              />
+            </motion.div>
+            <motion.div variants={childVariants} className="">
+              <TextField
+                type="email"
+                placeholder="Email"
+                name="email"
+                handleChange={handleChange}
+                handleBlur={handleBlur}
+                value={values.email}
+                error={errors.email}
+                touched={touched.email}
+              />
+            </motion.div>
+            <motion.div
+              variants={childVariants}
+              className="flex gap-2 items-start"
+            >
+              <PasswordField
+                name="password"
+                placeholder="Password"
+                handleChange={handleChange}
+                handleBlur={handleBlur}
+                value={values.password}
+                error={errors.password}
+                touched={touched.password}
+              />
+              <PasswordField
+                name="password2"
+                placeholder="Confirm Password"
+                handleChange={handleChange}
+                handleBlur={handleBlur}
+                value={values.password2}
+                error={errors.password2}
+                touched={touched.password2}
+              />
+            </motion.div>
+            <motion.div variants={childVariants}>
+              <DefaultButton
+                type="submit"
+                isLoading={isLoading}
+                label="Create Account"
+                disable={!isUsernameAvailable}
+              />
+            </motion.div>
+          </StaggerChildren>
         </form>
       </div>
     </AuthLayout>

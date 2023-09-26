@@ -26,9 +26,11 @@ const PasswordField = ({
           onChange={handleChange}
           onBlur={handleBlur}
           value={value}
-          className={`${
-            error && touched ? "border-red-500" : "border-gray-500"
-          }   w-full h-[40px] text-sm text-white rounded-[6px] peer bg-gray-500  pl-4 placeholder:text-gray-200 `}
+          className={`border ${
+            error && touched
+              ? "border-red-500 focus:border-red-500 border-2"
+              : "border-gray-500 focus:border-purple-500 border"
+          } w-full h-[38px] text-sm text-white rounded-[6px] focus:outline-none  focus:ring-0  peer bg-gray-600  pl-4 placeholder:text-gray-200  `}
         />
         <span
           onClick={togglePasswordVisibility}
@@ -43,7 +45,7 @@ const PasswordField = ({
       </div>
       <label
         htmlFor={name}
-        className="text-[13px] text-gray-400 font-bold peer-focus:text-yellow-500 after:content-['*'] after:ml-0.5 after:text-red-500"
+        className="text-[13px] text-gray-300 font-bold peer-focus:text-purple-500 after:content-['*'] after:ml-0.5 after:text-red-500"
       >
         {placeholder}
       </label>

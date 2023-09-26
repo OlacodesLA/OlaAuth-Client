@@ -8,6 +8,8 @@ import { useSelector } from "react-redux";
 import { DefaultButton, PasswordField, TextField } from "@/components";
 import { loginSchema } from "@/schemas";
 import { Navigate } from "react-router-dom";
+import { motion } from "framer-motion";
+import StaggerChildren, { childVariants } from "@/animations/staggerChildren";
 
 const Login = () => {
   const [redirect, setRedirect] = useState(false);
@@ -47,28 +49,40 @@ const Login = () => {
   return (
     <AuthLayout tab>
       <div className="">
-        Login Page
         <form onSubmit={handleSubmit}>
-          <TextField
-            type="email"
-            placeholder="Email"
-            name="email"
-            handleChange={handleChange}
-            handleBlur={handleBlur}
-            value={values.email}
-            error={errors.email}
-            touched={touched.email}
-          />
-          <PasswordField
-            name="password"
-            placeholder="Password"
-            handleChange={handleChange}
-            handleBlur={handleBlur}
-            value={values.password}
-            error={errors.password}
-            touched={touched.password}
-          />
-          <DefaultButton type="submit" isLoading={isLoading} label="Login" />
+          <StaggerChildren>
+            <motion.div variants={childVariants} className="">
+              <TextField
+                type="email"
+                placeholder="Email"
+                name="email"
+                handleChange={handleChange}
+                handleBlur={handleBlur}
+                value={values.email}
+                error={errors.email}
+                touched={touched.email}
+              />
+            </motion.div>
+
+            <motion.div variants={childVariants} className="">
+              <PasswordField
+                name="password"
+                placeholder="Password"
+                handleChange={handleChange}
+                handleBlur={handleBlur}
+                value={values.password}
+                error={errors.password}
+                touched={touched.password}
+              />
+            </motion.div>
+            <motion.div variants={childVariants} className="">
+              <DefaultButton
+                type="submit"
+                isLoading={isLoading}
+                label="Login"
+              />
+            </motion.div>
+          </StaggerChildren>
         </form>
       </div>
     </AuthLayout>

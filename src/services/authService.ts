@@ -41,6 +41,7 @@ export const loginUser =
   (email, password): AppThunk =>
   async (dispatch) => {
     try {
+      dispatch(setIsLoading(true));
       const { error, serverResponse } = await loginAPI({ email, password });
       if (!error) {
         const { firstName, lastName, email } = await serverResponse?.data;
@@ -49,6 +50,7 @@ export const loginUser =
         dispatch(setEmail(email));
       }
       console.log(serverResponse);
+      dispatch(setIsLoading(false));
     } catch (error) {
       console.error(error);
     }
