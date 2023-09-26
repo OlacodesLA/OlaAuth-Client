@@ -9,11 +9,8 @@ import { useSelector } from "react-redux";
 import { RootState } from "@/store";
 import { registerSchema } from "@/schemas";
 import { Navigate } from "react-router-dom";
-import { motion, useAnimate } from "framer-motion";
-import StaggerChildren, {
-  parentVariants,
-  childVariants,
-} from "@/animations/staggerChildren";
+import { motion } from "framer-motion";
+import StaggerChildren, { childVariants } from "@/animations/staggerChildren";
 
 const Register = () => {
   const [isUsernameAvailable, setIsUsernameAvailable] = useState(true);
