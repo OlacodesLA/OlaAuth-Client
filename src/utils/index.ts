@@ -20,9 +20,8 @@ export function getToken(): boolean | string {
   }
 }
 
-export function setToken(token: string) {
+export function setToken() {
   Cookies.set("token", getToken().toString(), { expires: 7 });
-
   return true;
 }
 
