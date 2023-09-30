@@ -13,7 +13,7 @@ import {
   setEmail,
   setIsLoading,
 } from "@/store/slice/profileSlice";
-import { removeToken } from "@/utils";
+import { getToken, removeToken, setToken } from "@/utils";
 
 export const registerUser =
   (data): AppThunk =>
@@ -45,6 +45,8 @@ export const loginUser =
       dispatch(setIsLoading(true));
       const { error, serverResponse } = await loginAPI({ email, password });
       if (!error) {
+        const token: any = getToken();
+        setToken(token);
         const { firstName, lastName, email } = await serverResponse?.data;
         dispatch(setFirstName(firstName));
         dispatch(setLastName(lastName));

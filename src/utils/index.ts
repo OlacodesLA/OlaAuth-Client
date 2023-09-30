@@ -13,14 +13,22 @@ export function isAuthenticated(): boolean {
 export function getToken(): boolean | string {
   const token = Cookies.get("token");
   if (token) {
+    console.log(token);
     return token;
   } else {
     return false;
   }
 }
 
-export function removeToken(): void {
+export function setToken(token: string) {
+  Cookies.set("token", getToken().toString(), { expires: 7 });
+
+  return true;
+}
+
+export function removeToken() {
   Cookies.remove("token");
+  return true;
 }
 
 export function fmtResponse(responseData: any, error: boolean, toast: any) {
