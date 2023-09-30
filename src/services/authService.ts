@@ -13,7 +13,7 @@ import {
   setEmail,
   setIsLoading,
 } from "@/store/slice/profileSlice";
-import { getToken, removeToken, setToken } from "@/utils";
+import { removeToken, setToken } from "@/utils";
 
 export const registerUser =
   (data): AppThunk =>
