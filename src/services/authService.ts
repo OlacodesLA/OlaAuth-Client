@@ -45,8 +45,7 @@ export const loginUser =
       dispatch(setIsLoading(true));
       const { error, serverResponse } = await loginAPI({ email, password });
       if (!error) {
-        const token: any = getToken();
-        setToken(token);
+        setToken();
         const { firstName, lastName, email } = await serverResponse?.data;
         dispatch(setFirstName(firstName));
         dispatch(setLastName(lastName));
