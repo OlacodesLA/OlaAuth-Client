@@ -19,6 +19,10 @@ export function getToken(): boolean | string {
   }
 }
 
+export function removeToken(): void {
+  Cookies.remove("token");
+}
+
 export function fmtResponse(responseData: any, error: boolean, toast: any) {
   const { statusText, status, data } = responseData;
 

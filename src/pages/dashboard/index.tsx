@@ -40,7 +40,7 @@ const Home = () => {
         {firstName} {lastName}
       </div>
       <div className="">{email}</div>
-      <button onClick={logout} className="text-red-500 text-2xl">
+      <button onClick={() => logout()} className="text-red-500 text-2xl">
         Logout
       </button>
     </DashboardLayout>

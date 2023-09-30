@@ -13,6 +13,7 @@ import {
   setEmail,
   setIsLoading,
 } from "@/store/slice/profileSlice";
+import { removeToken } from "@/utils";
 
 export const registerUser =
   (data): AppThunk =>
@@ -107,6 +108,8 @@ export const checkUsername = async (newUsername) => {
 export const logoutUser = async () => {
   try {
     const { error } = await logoutAPI();
+    removeToken();
+
     return !error;
   } catch (error) {
     console.log(error);
